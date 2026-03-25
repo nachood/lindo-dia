@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para vos 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+html, body{
+margin:0;
+padding:0;
+height:100%;
+overflow:hidden;
+font-family:'Poppins', sans-serif;
+}
+
+/* fondo */
+#bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background: radial-gradient(circle at top, #0a0f2f, #000814 70%);
+z-index:-2;
+transition: background 1.5s;
+}
+
+/* estrellas */
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+opacity:0.8;
+animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2;}
+to{opacity:1;}
+}
+
+/* contenedor */
+.screen{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:90%;
+text-align:center;
+}
+
+/* botones */
+button{
+padding:12px 22px;
+border:none;
+border-radius:20px;
+background:linear-gradient(45deg,#ff4dff,#a64dff);
+color:white;
+font-size:16px;
+cursor:pointer;
+box-shadow:0 0 12px #ff4dff;
+margin-top:20px;
+}
+
+/* TITULOS */
+.neon{
+color:#ffd6ff;
+text-shadow:
+0 0 8px #ff7ad9,
+0 0 15px #c084ff;
+}
+
+/* TEXTO CON LATIDO */
+.softText{
+font-size:24px;
+font-weight:500;
+color:#4b006e; /* violeta oscuro legible */
+
+text-shadow:
+0 0 6px rgba(255,255,255,0.6),
+0 0 10px rgba(255,150,255,0.5);
+
+/* efecto latido */
+animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse{
+0%{
+transform:scale(1);
+opacity:0.85;
+}
+50%{
+transform:scale(1.05);
+opacity:1;
+}
+100%{
+transform:scale(1);
+opacity:0.85;
+}
+}
+
+/* boton esquina */
+#warnBtn{
+position:fixed;
+bottom:20px;
+left:20px;
+display:none;
+z-index:50;
+}
+
+/* alerta */
+.fullAlert{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff8a00,#ff3d6e);
+display:none;
+justify-content:center;
+align-items:center;
+font-size:44px;
+text-align:center;
+z-index:999;
+animation: shake 0.4s;
+color:#2b0018;
+text-shadow:
+0 0 10px rgba(255,255,255,0.5),
+0 0 20px rgba(255,200,200,0.6);
+}
+
+@keyframes shake{
+0%{transform:translate(0);}
+25%{transform:translate(-10px);}
+50%{transform:translate(10px);}
+75%{transform:translate(-10px);}
+100%{transform:translate(0);}
+}
+
+/* corazones */
+.heart{
+position:absolute;
+animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp{
+from{transform:translateY(0); opacity:1;}
+to{transform:translateY(-200px); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+<div id="stars"></div>
+
+<!-- PANTALLA 1 -->
+<div class="screen" id="screen1">
+<h1 class="neon">No fue un cumpleaños normal...</h1>
+<button onclick="next1()">Pero fue muy especial</button>
+</div>
+
+<!-- PANTALLA 2 -->
+<div class="screen" id="screen2" style="display:none;">
+<h1 class="neon">Por que lo pase con vos mor &lt;3</h1>
+<p id="text1" class="softText"></p>
+
+<button onclick="album()">Y encima me hiciste un hermoso regalo</button>
+</div>
+
+<!-- PANTALLA 3 -->
+<div class="screen" id="screen3" style="display:none;">
+<h2 class="neon">Y encima... hiciste algo que no me esperaba</h2>
+
+<p class="neon">Tu primer regalo...<br>y ya fue perfecto &lt;3</p>
+
+<div style="margin-top:20px; padding:20px; backdrop-filter:blur(10px); border-radius:20px;">
+<p class="softText">📸 Nuestro álbum</p>
+<button onclick="window.open('https://myalbum.com/album/RNtYFYbvwD5C8p')">Abrirlo</button>
+</div>
+
+<button onclick="final()">Final</button>
+</div>
+
+<!-- PANTALLA 4 -->
+<div class="screen" id="screen4" style="display:none;">
+<p id="finalText" class="softText"></p>
+<button onclick="love()">Te amo</button>
+</div>
+
+<!-- BOTON OCULTO -->
+<button id="warnBtn" onclick="warn()">NO ME TOQUES SINO..</button>
+
+<!-- ALERTA -->
+<div class="fullAlert" id="alert">
+OK YA ENTENDI QUE ME AMAS 🙈💖
+</div>
+
+<script>
+
+/* estrellas */
+for(let i=0;i<120;i++){
+let star=document.createElement("div");
+star.className="star";
+star.style.top=Math.random()*100+"%";
+star.style.left=Math.random()*100+"%";
+star.style.animationDuration=(Math.random()*2+1)+"s";
+document.getElementById("stars").appendChild(star);
+}
+
+/* transición */
+function next1(){
+document.getElementById("bg").style.background =
+"linear-gradient(135deg,#ffb6f9,#cde8ff)";
+
+document.getElementById("screen1").style.display="none";
+document.getElementById("screen2").style.display="block";
+
+document.getElementById("warnBtn").style.display="block";
+
+typeText("No necesitabas estar en persona porque siempre estuviste en el lugar correcto ❤️","text1",40);
+}
+
+/* escribir */
+function typeText(text,id,speed){
+let i=0;
+document.getElementById(id).innerHTML="";
+function typing(){
+if(i<text.length){
+document.getElementById(id).innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,speed);
+}
+}
+typing();
+}
+
+/* album */
+function album(){
+document.getElementById("screen2").style.display="none";
+document.getElementById("screen3").style.display="block";
+}
+
+/* final */
+function final(){
+document.getElementById("screen3").style.display="none";
+document.getElementById("screen4").style.display="block";
+
+typeText("Gracias por hacer especial un día que era mío... pero terminó siendo nuestro ❤️","finalText",40);
+}
+
+/* corazones */
+function love(){
+for(let i=0;i<40;i++){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"%";
+heart.style.top="80%";
+heart.style.fontSize=(Math.random()*25+10)+"px";
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),3000);
+}
+}
+
+/* alerta */
+function warn(){
+let alert=document.getElementById("alert");
+alert.style.display="flex";
+
+setTimeout(()=>{
+alert.style.display="none";
+},1200);
+}
+
+</script>
+
+</body>
+</html>
