@@ -1,284 +1,470 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Para vos 💖</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f8e9df" />
+  <title>Para mamá, con todo mi amor</title>
+  <style>
+    :root {
+      --ink: #5e3f3c;
+      --muted: #8d6761;
+      --rose: #d96878;
+      --rose-dark: #b64d62;
+      --peach: #f8e9df;
+      --paper: #fffaf4;
+      --thread: #c86776;
+      --shadow: 0 18px 50px rgba(109, 70, 65, .17);
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    * { box-sizing: border-box; }
 
-<style>
-html, body{
-margin:0;
-padding:0;
-height:100%;
-overflow:hidden;
-font-family:'Poppins', sans-serif;
-}
+    html { scroll-behavior: smooth; }
 
-/* fondo */
-#bg{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background: radial-gradient(circle at top, #0a0f2f, #000814 70%);
-z-index:-2;
-transition: background 1.5s;
-}
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 12%, rgba(255,255,255,.7) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 28%, rgba(255,255,255,.45) 0 2px, transparent 3px),
+        linear-gradient(135deg, #f5ded7 0%, #f8e9df 48%, #f4d8d5 100%);
+      background-size: 28px 28px, 36px 36px, auto;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
 
-/* estrellas */
-.star{
-position:absolute;
-width:2px;
-height:2px;
-background:white;
-opacity:0.8;
-animation: twinkle 2s infinite alternate;
-}
+    .page {
+      width: min(100% - 28px, 680px);
+      margin: 0 auto;
+      padding: 22px 0 52px;
+      position: relative;
+    }
 
-@keyframes twinkle{
-from{opacity:0.2;}
-to{opacity:1;}
-}
+    .top-note {
+      text-align: center;
+      color: var(--muted);
+      font: 700 .78rem/1.2 system-ui, sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin: 3px 0 15px;
+    }
 
-/* contenedor */
-.screen{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:90%;
-text-align:center;
-}
+    .hero {
+      text-align: center;
+      position: relative;
+      padding: 16px 8px 31px;
+    }
 
-/* botones */
-button{
-padding:12px 22px;
-border:none;
-border-radius:20px;
-background:linear-gradient(45deg,#ff4dff,#a64dff);
-color:white;
-font-size:16px;
-cursor:pointer;
-box-shadow:0 0 12px #ff4dff;
-margin-top:20px;
-}
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      bottom: 0;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, var(--thread) 0 13px, transparent 13px 21px);
+      opacity: .65;
+    }
 
-/* TITULOS */
-.neon{
-color:#ffd6ff;
-text-shadow:
-0 0 8px #ff7ad9,
-0 0 15px #c084ff;
-}
+    .machine {
+      display: inline-block;
+      font-size: clamp(3.2rem, 16vw, 5.8rem);
+      line-height: .85;
+      filter: drop-shadow(0 8px 5px rgba(120, 73, 70, .12));
+      transform: rotate(-4deg);
+      margin-bottom: 15px;
+    }
 
-/* TEXTO CON LATIDO */
-.softText{
-font-size:24px;
-font-weight:500;
-color:#4b006e; /* violeta oscuro legible */
+    h1 {
+      margin: 0;
+      font-size: clamp(2.05rem, 9vw, 3.6rem);
+      line-height: .98;
+      color: var(--rose-dark);
+      font-weight: 700;
+    }
 
-text-shadow:
-0 0 6px rgba(255,255,255,0.6),
-0 0 10px rgba(255,150,255,0.5);
+    .subtitle {
+      margin: 14px auto 0;
+      max-width: 390px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.5;
+    }
 
-/* efecto latido */
-animation: pulse 2.5s ease-in-out infinite;
-}
+    .letter {
+      position: relative;
+      margin-top: 28px;
+      padding: clamp(27px, 7vw, 52px) clamp(22px, 7vw, 58px);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      border-radius: 4px;
+      isolation: isolate;
+    }
 
-@keyframes pulse{
-0%{
-transform:scale(1);
-opacity:0.85;
-}
-50%{
-transform:scale(1.05);
-opacity:1;
-}
-100%{
-transform:scale(1);
-opacity:0.85;
-}
-}
+    .letter::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 2px dashed rgba(200,103,118,.42);
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-/* boton esquina */
-#warnBtn{
-position:fixed;
-bottom:20px;
-left:20px;
-display:none;
-z-index:50;
-}
+    .letter::after {
+      content: "🧵";
+      position: absolute;
+      top: -21px;
+      right: 20px;
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      background: #fff4ee;
+      border-radius: 50%;
+      box-shadow: 0 5px 14px rgba(109,70,65,.15);
+      font-size: 1.48rem;
+      transform: rotate(9deg);
+    }
 
-/* alerta */
-.fullAlert{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(135deg,#ff8a00,#ff3d6e);
-display:none;
-justify-content:center;
-align-items:center;
-font-size:44px;
-text-align:center;
-z-index:999;
-animation: shake 0.4s;
-color:#2b0018;
-text-shadow:
-0 0 10px rgba(255,255,255,0.5),
-0 0 20px rgba(255,200,200,0.6);
-}
+    .salutation {
+      margin: 0 0 23px;
+      color: var(--rose-dark);
+      font-size: 1.45rem;
+      font-weight: 700;
+    }
 
-@keyframes shake{
-0%{transform:translate(0);}
-25%{transform:translate(-10px);}
-50%{transform:translate(10px);}
-75%{transform:translate(-10px);}
-100%{transform:translate(0);}
-}
+    .letter p {
+      margin: 0 0 19px;
+      font-size: clamp(1.06rem, 4.4vw, 1.22rem);
+      line-height: 1.72;
+    }
 
-/* corazones */
-.heart{
-position:absolute;
-animation: floatUp 3s linear forwards;
-}
+    .signature {
+      margin-top: 30px !important;
+      margin-bottom: 0 !important;
+      text-align: right;
+      color: var(--rose-dark);
+      font-style: italic;
+      font-weight: 700;
+    }
 
-@keyframes floatUp{
-from{transform:translateY(0); opacity:1;}
-to{transform:translateY(-200px); opacity:0;}
-}
-</style>
+    .letter-step {
+      display: none;
+    }
+
+    .letter-step.active {
+      display: block;
+      animation: letterFade .7s ease both;
+    }
+
+    .next-area {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 28px;
+      padding-top: 19px;
+      border-top: 1px solid rgba(200,103,118,.22);
+    }
+
+    .progress {
+      color: var(--muted);
+      font: .78rem/1.2 system-ui, sans-serif;
+      letter-spacing: .08em;
+    }
+
+    .next-button {
+      appearance: none;
+      border: 1px solid rgba(182,77,98,.2);
+      border-radius: 999px;
+      padding: 12px 20px;
+      color: var(--rose-dark);
+      background: #fff4ee;
+      box-shadow: 0 5px 14px rgba(109,70,65,.1);
+      font: 700 1rem Georgia, serif;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform .15s ease, background .15s ease;
+    }
+
+    .next-button:active { transform: scale(.95); background: #fbe6e2; }
+    .next-button:focus-visible { outline: 3px solid #6f9da0; outline-offset: 3px; }
+
+    .photo-section[hidden],
+    .love-area[hidden] { display: none; }
+
+    .photo-section.reveal,
+    .love-area.reveal { animation: fadeUp .9s ease both; }
+
+    .photo-section {
+      text-align: center;
+      padding-top: 43px;
+    }
+
+    .photo-section h2 {
+      margin: 0 0 18px;
+      font-size: 1.65rem;
+      color: var(--rose-dark);
+    }
+
+    .photo-frame {
+      width: min(100%, 470px);
+      margin: 0 auto;
+      padding: 10px;
+      background: #fffaf4;
+      box-shadow: var(--shadow);
+      transform: rotate(1.2deg);
+      position: relative;
+    }
+
+    .photo-frame::before,
+    .photo-frame::after {
+      content: "";
+      position: absolute;
+      width: 49px;
+      height: 16px;
+      background: rgba(242, 195, 166, .78);
+      top: -7px;
+      box-shadow: 0 1px 5px rgba(120,73,70,.1);
+    }
+
+    .photo-frame::before { left: 21px; transform: rotate(-9deg); }
+    .photo-frame::after { right: 21px; transform: rotate(8deg); }
+
+    .photo-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 600 / 800;
+      object-fit: cover;
+    }
+
+    .caption {
+      margin: 19px auto 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      font-style: italic;
+    }
+
+    .love-area {
+      text-align: center;
+      padding: 45px 0 18px;
+    }
+
+    .love-area p {
+      margin: 0 0 15px;
+      color: var(--muted);
+      font-size: .98rem;
+    }
+
+    .love-button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      min-width: 238px;
+      min-height: 70px;
+      padding: 20px 38px;
+      color: white;
+      background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+      box-shadow: 0 12px 26px rgba(182,77,98,.32), inset 0 1px 0 rgba(255,255,255,.35);
+      font: 700 1.34rem Georgia, serif;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .love-button:active,
+    .love-button.is-pressed { transform: scale(.95); box-shadow: 0 5px 13px rgba(182,77,98,.22); }
+    .love-button:focus-visible { outline: 3px solid #6f9da0; outline-offset: 4px; }
+
+    .love-button-wrap {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+
+    .burst-layer {
+      position: absolute;
+      inset: -170px;
+      z-index: 3;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .footer {
+      margin-top: 17px;
+      text-align: center;
+      color: rgba(94,63,60,.62);
+      font: .78rem/1.4 system-ui, sans-serif;
+    }
+
+    .burst {
+      position: absolute;
+      z-index: 4;
+      pointer-events: none;
+      left: 50%;
+      top: 50%;
+      font-size: var(--size);
+      line-height: 1;
+      will-change: transform, opacity;
+      animation: fly var(--duration) cubic-bezier(.16,.75,.25,1) forwards;
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    @keyframes fly {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(.3) rotate(0deg); }
+      12% { opacity: 1; }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3) rotate(var(--rotation)); }
+    }
+
+    @keyframes letterFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
-
 <body>
+  <main class="page">
+    <p class="top-note">Hecha con amor, puntada por puntada</p>
 
-<div id="bg"></div>
-<div id="stars"></div>
+    <header class="hero">
+      <div class="machine" aria-hidden="true">🧵</div>
+      <h1>Para vos, mamá</h1>
+      <p class="subtitle">Una pequeña carta para la persona que siempre fue mi hogar.</p>
+    </header>
 
-<!-- PANTALLA 1 -->
-<div class="screen" id="screen1">
-<h1 class="neon">No fue un cumpleaños normal...</h1>
-<button onclick="next1()">Pero fue muy especial</button>
-</div>
+    <article class="letter" aria-label="Carta para mamá" aria-live="polite">
+      <div class="letter-step active">
+        <p class="salutation">Querida mamá:</p>
+        <p>Te hago esta carta desde el corazón para decirte que no me alcanzan las palabras para expresar cuánto te amo y lo feliz que me hacés con tus comidas, nuestras charlas, tu compañía y ahora también con la forma en que estás sobrellevando mi relación actual.</p>
+      </div>
 
-<!-- PANTALLA 2 -->
-<div class="screen" id="screen2" style="display:none;">
-<h1 class="neon">Por que lo pase con vos mor &lt;3</h1>
-<p id="text1" class="softText"></p>
+      <div class="letter-step">
+        <p>Sé que fuiste mi mamá y mi papá, y que no debe haber sido fácil hacerlo sola siendo tan joven. Aun así, seguiste adelante, y de verdad aprendí de vos valores como nunca rendirme. Siempre te vi como mi heroína.</p>
+      </div>
 
-<button onclick="album()">Y encima me hiciste un hermoso regalo</button>
-</div>
+      <div class="letter-step">
+        <p>También sé que a veces te pesa pensar en cómo me educaste, por la forma en que te educó la abuela. No te culpo: hacías lo que podías con las herramientas que tenías. Por eso me haría muy feliz que no sigas pensando que podrías haberlo hecho mejor, porque con todo lo que hiciste soy quien soy hoy y no podría ser más feliz.</p>
+      </div>
 
-<!-- PANTALLA 3 -->
-<div class="screen" id="screen3" style="display:none;">
-<h2 class="neon">Y encima... hiciste algo que no me esperaba</h2>
+      <div class="letter-step">
+        <p>No me gusta decirte “te perdono”, porque nunca sentí que hubiera algo que perdonarte. Obviamente, en su momento algunas cosas me dolieron, pero después entendí que siempre hiciste lo mejor que pudiste. Y gracias a vos soy como soy hoy.</p>
+      </div>
 
-<p class="neon">Tu primer regalo...<br>y ya fue perfecto &lt;3</p>
+      <div class="letter-step">
+        <p>Te amo y siempre te voy a amar. Gracias por todas las veces que hiciste lo que pudiste por mí. Sos mi heroína.</p>
+        <p class="signature">Tu hijo,<br />Nacho</p>
+      </div>
 
-<div style="margin-top:20px; padding:20px; backdrop-filter:blur(10px); border-radius:20px;">
-<p class="softText">📸 Nuestro álbum</p>
-<button onclick="window.open('https://myalbum.com/album/RNtYFYbvwD5C8p')">Abrirlo</button>
-</div>
+      <div class="next-area">
+        <span class="progress" id="progress">1 de 5</span>
+        <button class="next-button" id="next-button" type="button">Siguiente →</button>
+      </div>
+    </article>
 
-<button onclick="final()">Final</button>
-</div>
+    <section class="photo-section" id="photo-section" aria-labelledby="photo-title" hidden>
+      <h2 id="photo-title">Siempre con vos ma</h2>
+      <figure class="photo-frame">
+        <img src="501304997_9821354817933851_5942677274495856883_n.jpg" alt="Nacho junto a su mamá, sonriendo" />
+      </figure>
+      <p class="caption">Gracias por ser mi mamá y mi heroína.</p>
+    </section>
 
-<!-- PANTALLA 4 -->
-<div class="screen" id="screen4" style="display:none;">
-<p id="finalText" class="softText"></p>
-<button onclick="love()">Te amo</button>
-</div>
+    <section class="love-area" id="love-area" hidden>
+      <p>Cuando llegues al final, tocá este botón:</p>
+      <div class="love-button-wrap">
+        <div class="burst-layer" aria-hidden="true"></div>
+        <button class="love-button" type="button" aria-label="Mostrar una explosión de amor">Te amo, mamá</button>
+      </div>
+    </section>
 
-<!-- BOTON OCULTO -->
-<button id="warnBtn" onclick="warn()">NO ME TOQUES SINO..</button>
+    <footer class="footer">Feliz día, mamá · Con todo mi amor</footer>
+  </main>
 
-<!-- ALERTA -->
-<div class="fullAlert" id="alert">
-OK YA ENTENDI QUE ME AMAS 🙈💖
-</div>
+  <script>
+    const nextButton = document.querySelector('#next-button');
+    const progress = document.querySelector('#progress');
+    const steps = [...document.querySelectorAll('.letter-step')];
+    const photoSection = document.querySelector('#photo-section');
+    const loveArea = document.querySelector('#love-area');
+    const button = document.querySelector('.love-button');
+    const burstLayer = document.querySelector('.burst-layer');
+    const emojis = ['💖', '💕', '💗', '🌸', '✨', '🧵', '🫶', '💐', '❤️'];
+    let currentStep = 0;
+    let lastBurstAt = 0;
 
-<script>
+    nextButton.addEventListener('click', () => {
+      if (currentStep < steps.length - 1) {
+        currentStep += 1;
+        steps[currentStep].classList.add('active');
+        progress.textContent = `${currentStep + 1} de ${steps.length}`;
+        if (currentStep === steps.length - 1) {
+        nextButton.textContent = 'Tocá acá 💖';
+        }
+        window.setTimeout(() => steps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+        return;
+      }
 
-/* estrellas */
-for(let i=0;i<120;i++){
-let star=document.createElement("div");
-star.className="star";
-star.style.top=Math.random()*100+"%";
-star.style.left=Math.random()*100+"%";
-star.style.animationDuration=(Math.random()*2+1)+"s";
-document.getElementById("stars").appendChild(star);
-}
+      nextButton.hidden = true;
+      progress.hidden = true;
+      photoSection.hidden = false;
+      loveArea.hidden = false;
+      photoSection.classList.add('reveal');
+      window.setTimeout(() => loveArea.classList.add('reveal'), 180);
+      window.setTimeout(() => photoSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 280);
+    });
 
-/* transición */
-function next1(){
-document.getElementById("bg").style.background =
-"linear-gradient(135deg,#ffb6f9,#cde8ff)";
+    function createBurst() {
+      const amount = 40;
 
-document.getElementById("screen1").style.display="none";
-document.getElementById("screen2").style.display="block";
+      for (let i = 0; i < amount; i += 1) {
+        const emoji = document.createElement('span');
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 70 + Math.random() * 160;
+        emoji.className = 'burst';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
+        emoji.style.setProperty('--dy', `${Math.sin(angle) * distance - 45}px`);
+        emoji.style.setProperty('--size', `${1.05 + Math.random() * .75}rem`);
+        emoji.style.setProperty('--duration', `${850 + Math.random() * 700}ms`);
+        emoji.style.setProperty('--rotation', `${-55 + Math.random() * 110}deg`);
+        burstLayer.appendChild(emoji);
+        emoji.addEventListener('animationend', () => emoji.remove(), { once: true });
+      }
+    }
 
-document.getElementById("warnBtn").style.display="block";
+    function triggerLove() {
+      const now = Date.now();
+      if (now - lastBurstAt < 250) return;
+      lastBurstAt = now;
+      button.classList.add('is-pressed');
+      createBurst();
+      button.animate(
+        [
+          { transform: 'scale(1)' },
+          { transform: 'scale(1.08)' },
+          { transform: 'scale(1)' }
+        ],
+        { duration: 360, easing: 'ease-out' }
+      );
+      window.setTimeout(() => button.classList.remove('is-pressed'), 180);
+    }
 
-typeText("No necesitabas estar en persona porque siempre estuviste en el lugar correcto ❤️","text1",40);
-}
-
-/* escribir */
-function typeText(text,id,speed){
-let i=0;
-document.getElementById(id).innerHTML="";
-function typing(){
-if(i<text.length){
-document.getElementById(id).innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,speed);
-}
-}
-typing();
-}
-
-/* album */
-function album(){
-document.getElementById("screen2").style.display="none";
-document.getElementById("screen3").style.display="block";
-}
-
-/* final */
-function final(){
-document.getElementById("screen3").style.display="none";
-document.getElementById("screen4").style.display="block";
-
-typeText("Gracias por hacer especial un día que era mío... pero terminó siendo nuestro ❤️","finalText",40);
-}
-
-/* corazones */
-function love(){
-for(let i=0;i<40;i++){
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"%";
-heart.style.top="80%";
-heart.style.fontSize=(Math.random()*25+10)+"px";
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(),3000);
-}
-}
-
-/* alerta */
-function warn(){
-let alert=document.getElementById("alert");
-alert.style.display="flex";
-
-setTimeout(()=>{
-alert.style.display="none";
-},1200);
-}
-
-</script>
-
+    button.addEventListener('pointerdown', triggerLove);
+    button.addEventListener('click', triggerLove);
+  </script>
 </body>
 </html>
